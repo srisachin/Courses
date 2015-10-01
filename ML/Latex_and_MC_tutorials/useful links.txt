@@ -1,0 +1,25 @@
+Latex for Linux
+http://www.tug.org/texlive/
+
+Latex for Mac
+https://tug.org/mactex/
+
+Latex for Windows
+http://miktex.org/about
+
+Texmaker IDE:
+http://www.xm1math.net/texmaker/download.html
+
+Step-by-step Latex tutorials:
+http://www.andy-roberts.net/misc/latex/
+
+Inkscape:
+https://inkscape.org/en/download/
+
+Matrix Calculus:
+http://en.wikipedia.org/wiki/Matrix_calculus
+http://www.atmos.washington.edu/~dennis/MatrixCalculus.pdf
+http://select.cs.cmu.edu/class/10725-S10/recitations/r4/Matrix_Calculus_Algebra.pdf
+
+Importing tables to LaTeX:
+http://tex.stackexchange.com/questions/146716/importing-csv-file-into-latex-as-a-table

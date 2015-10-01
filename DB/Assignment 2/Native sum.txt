@@ -1,0 +1,1 @@
+SELECT Native,sum(capitalgains), sum(capitalloss) FROM PracticeDB.541puzzle group by Native order by sum(capitalgains) desc, sum(capitalloss) desc;

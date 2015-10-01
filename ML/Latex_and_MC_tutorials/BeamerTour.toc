@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.33pt}
+\beamer@sectionintoc {1}{A Question from Grade School}{2}{0}{1}
+\beamer@sectionintoc {2}{A Geometry Proof}{12}{0}{2}
+\beamer@sectionintoc {3}{More Advanced Features of {\sc beamer}}{23}{0}{3}

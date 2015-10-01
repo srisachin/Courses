@@ -1,0 +1,27 @@
+
+
+
+def main():
+        filename = 'C:\Users\text_file = open(filename, "r")
+        text_file = open(filename, "r")
+        txt = text_file.readlines()
+        for line in txt:
+            y=0
+            for chars in line:
+                grid = self.get_grid(x,y)
+                if str(chars) == '~':
+                    grid.blocked = False
+                elif str(chars) == 'b':
+                    grid.blocked = True
+                elif str(chars) == 'S':
+                    self.start = grid
+                    self.start.path = True
+                elif str(chars) == 'G':
+                    self.end = grid
+                    self.end.path = True
+                self.grids.append(grid)
+                y = y+1
+            x = x+1
+        text_file.close()
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,277 @@
+/***********************************************************/
+/* (c) December 2002                                       */
+/* College of Computing                                    */
+/* Georgia Institute of Technolgy                          */
+/* Project for Sven Koenig                                 */
+/* "Comparing Lifelong Planning A* and A* in Simple Mazes" */
+/***********************************************************/
+
+This is code independent of the original LPA* and A* code. This
+comparison of LPA* and A* in mazes was coded from scratch to benefit
+A* (for example, edge costs are no longer set to infinity but the
+edges are deleted, the time it takes A* to expand a vertex was
+decreased, and so on). The results were obtained on a PC.
+
+Warning: Use with caution. This code is for research purposes only. We
+assume no liability whatsoever. Please send bug reports to skoenig@cc.gatech.edu.
+
+----------------------------------------------------------------------
+
+Maze 1: goal cannot get blocked, heuristics = Manhattan distance
+
+width = 61, height = 61, obstacle density = 0.30, start= (50,50), goal= (10,10)
+The maze is four-connected.
+runs = 100, replanning episodes/run = 500, cells changing per replanning episode = 6 (0.16 percent)
+The goal cell cannot get blocked.
+
+LPA* replans.
+LPA*: cell expansions/replanning episode =   59.61, 
+           heap percolates/replanning episode =  569.85,       
+           no path found/replanning episode =  4.34 percent, 
+           total time in main search routine/run = 13.1848,    
+           total time/run = 17.6676
+time[1] =  0.2070 time[2] =  0.2356 time[3] =  0.2572 time[4] =  0.2906 
+A* breaks ties in favor of cells with larger g-values.
+A*:   cell expansions/replanning episode =  478.19, 
+           heap percolates/replanning episode = 4170.94,       
+           no path found/replanning episode =  4.34 percent, 
+           total time in main search routine/run = 74.5279,    
+           total time/run = 78.3086
+time[1] =  0.1610 time[2] =  0.3170 time[3] =  0.4724 time[4] =  0.6304 
+A* breaks ties in favor of cells with smaller g-values.
+A*:   cell expansions/replanning episode =  688.24, 
+           heap percolates/replanning episode = 3652.02,       
+           no path found/replanning episode =  4.34 percent, 
+           total time in main search routine/run = 88.9743,    
+           total time/run = 92.7870
+time[1] =  0.1990 time[2] =  0.3909 time[3] =  0.5747 time[4] =  0.7679 
+
+LPA* outperforms A* after the first replanning episode and speeds up
+the total runtime in the long run by a factor of 4.4.
+
+Maze 1: goal can get blocked, heuristics = Manhattan distance
+
+width = 61, height = 61, obstacle density = 0.30, start= (50,50), goal= (10,10)
+The maze is four-connected.
+runs = 100, replanning episodes/run = 500, cells changing per replanning episode = 6 (0.16 percent)
+The goal cell can get blocked.
+
+LPA* replans.
+LPA*: cell expansions/replanning episode =  107.63, 
+           heap percolates/replanning episode =  755.02,       
+           no path found/replanning episode = 32.71 percent, 
+           total time in main search routine/run = 22.1212,    
+           total time/run = 27.2437
+time[1] =  0.3880 time[2] =  0.4457 time[3] =  0.4875 time[4] =  0.5258 
+A* breaks ties in favor of cells with larger g-values.
+A*:   cell expansions/replanning episode = 1042.54, 
+           heap percolates/replanning episode = 8307.67,       
+           no path found/replanning episode = 32.71 percent, 
+           total time in main search routine/run = 168.0013,    
+           total time/run = 172.4291
+time[1] =  0.3495 time[2] =  0.7005 time[3] =  1.0529 time[4] =  1.4097 
+A* breaks ties in favor of cells with smaller g-values.
+A*:   cell expansions/replanning episode = 1191.42, 
+           heap percolates/replanning episode = 6795.00,       
+           no path found/replanning episode = 32.71 percent, 
+           total time in main search routine/run = 170.4110,    
+           total time/run = 174.9513
+time[1] =  0.3534 time[2] =  0.7762 time[3] =  1.1340 time[4] =  1.4920 
+
+LPA* outperforms A* after the first replanning episode and speeds up
+the total runtime in the long run by a factor of 6.3.
+
+Maze 1: goal cannot get blocked, heuristics = max difference in x and y coordinates
+
+width = 61, height = 61, obstacle density = 0.30, start= (50,50), goal= (10,10)
+The maze is four-connected.
+The heuristics is the maximum of the difference in x and y coordinates, rather than the Manhattan distance.
+runs = 100, replanning episodes/run = 500, cells changing per replanning episode = 6 (0.16 percent)
+The goal cell cannot get blocked.
+
+LPA* replans.
+LPA*: cell expansions/replanning episode =  106.37, 
+           heap percolates/replanning episode =  931.41,       
+           no path found/replanning episode =  4.30 percent, 
+           total time in main search routine/run = 24.2390,    
+           total time/run = 29.4539
+time[1] =  0.4576 time[2] =  0.5072 time[3] =  0.5719 time[4] =  0.6282 
+A* breaks ties in favor of cells with larger g-values.
+A*:   cell expansions/replanning episode = 1346.35, 
+           heap percolates/replanning episode = 7052.06,       
+           no path found/replanning episode =  4.30 percent, 
+           total time in main search routine/run = 188.0882,    
+           total time/run = 192.7606
+time[1] =  0.3781 time[2] =  0.7684 time[3] =  1.1612 time[4] =  1.5541 
+A* breaks ties in favor of cells with smaller g-values.
+A*:   cell expansions/replanning episode = 1397.97, 
+           heap percolates/replanning episode = 7079.12,       
+           no path found/replanning episode =  4.30 percent, 
+           total time in main search routine/run = 194.7150,    
+           total time/run = 199.3044
+time[1] =  0.3925 time[2] =  0.7965 time[3] =  1.2036 time[4] =  1.6092 
+
+LPA* outperforms A* after the first replanning episode and speeds up
+the total runtime in the long run by a factor of 6.5.
+
+Maze 1: goal can get blocked, heuristics = max difference in x and y coordinates
+
+width = 61, height = 61, obstacle density = 0.30, start= (50,50), goal= (10,10)
+The maze is four-connected.
+The heuristics is the maximum of the difference in x and y coordinates, rather than the Manhattan distance.
+runs = 100, replanning episodes/run = 500, cells changing per replanning episode = 6 (0.16 percent)
+The goal cell can get blocked.
+
+LPA* replans.
+LPA*: cell expansions/replanning episode =  144.35, 
+           heap percolates/replanning episode = 1019.83,       
+           no path found/replanning episode = 29.22 percent, 
+           total time in main search routine/run = 29.9155,    
+           total time/run = 34.8479
+time[1] =  0.5336 time[2] =  0.6188 time[3] =  0.6627 time[4] =  0.7261 
+A* breaks ties in favor of cells with larger g-values.
+A*:   cell expansions/replanning episode = 1638.48, 
+           heap percolates/replanning episode = 8534.06,       
+           no path found/replanning episode = 29.22 percent, 
+           total time in main search routine/run = 216.1421,    
+           total time/run = 220.5054
+time[1] =  0.4382 time[2] =  0.8895 time[3] =  1.3400 time[4] =  1.7956 
+A* breaks ties in favor of cells with smaller g-values.
+A*:   cell expansions/replanning episode = 1676.80, 
+           heap percolates/replanning episode = 8453.48,       
+           no path found/replanning episode = 29.22 percent, 
+           total time in main search routine/run = 220.7061,    
+           total time/run = 225.0835
+time[1] =  0.4547 time[2] =  0.9217 time[3] =  1.3891 time[4] =  1.8530 
+
+LPA* outperforms A* after the first replanning episode and speeds up
+the total runtime in the long run by a factor of 6.3.
+
+Maze 2: goal cannot get blocked, heuristics = max difference in x and y coordinates
+
+width = 40, height = 40, obstacle density = 0.40, start= (34,34), goal= (5,5)
+The maze is eight-connected.
+runs = 100, replanning episodes/run = 500, cells changing per replanning episode = 16 (1.00 percent)
+The goal cell cannot get blocked.
+
+LPA* replans.
+LPA*: cell expansions/replanning episode =   43.21,
+           heap percolates/replanning episode =  441.52,
+           no path found/replanning episode =  0.44 percent,
+           total time in main search routine/run = 13.6586,
+           total time/run = 20.4635
+time[1] =  0.0927 time[2] =  0.1314 time[3] =  0.1710 time[4] =  0.2111
+A* breaks ties in favor of cells with larger g-values.
+A*:   cell expansions/replanning episode =  188.89,
+           heap percolates/replanning episode = 1176.57,
+           no path found/replanning episode =  0.44 percent,
+           total time in main search routine/run = 35.2325,
+           total time/run = 40.2784
+time[1] =  0.0720 time[2] =  0.1517 time[3] =  0.2319 time[4] =  0.3102
+A* breaks ties in favor of cells with smaller g-values.
+A*:   cell expansions/replanning episode =  231.22,
+           heap percolates/replanning episode = 1266.43,
+           no path found/replanning episode =  0.44 percent,
+           total time in main search routine/run = 39.0571,
+           total time/run = 44.0297
+time[1] =  0.0827 time[2] =  0.1712 time[3] =  0.2601 time[4] =  0.3521
+
+LPA* outperforms A* after the first replanning episode and speeds up
+the total runtime in the long run by a factor of 2.0.
+
+Maze 2: goal can get blocked, heuristics = max difference in x and y coordinates
+
+width = 40, height = 40, obstacle density = 0.40, start= (34,34), goal= (5,5)
+The maze is eight-connected.
+runs = 100, replanning episodes/run = 500, cells changing per replanning episode = 16 (1.00 percent)
+The goal cell can get blocked.
+
+LPA* replans.
+LPA*: cell expansions/replanning episode =   94.02,
+           heap percolates/replanning episode =  649.54,
+           no path found/replanning episode = 37.06 percent,
+           total time in main search routine/run = 24.9670,
+           total time/run = 32.2149
+time[1] =  0.1752 time[2] =  0.2428 time[3] =  0.2971 time[4] =  0.3543
+A* breaks ties in favor of cells with larger g-values.
+A*:   cell expansions/replanning episode =  467.27,
+           heap percolates/replanning episode = 2648.45,
+           no path found/replanning episode = 37.06 percent,
+           total time in main search routine/run = 79.9538,
+           total time/run = 84.8289
+time[1] =  0.1605 time[2] =  0.3231 time[3] =  0.4858 time[4] =  0.6531
+A* breaks ties in favor of cells with smaller g-values.
+A*:   cell expansions/replanning episode =  494.03,
+           heap percolates/replanning episode = 2569.15,
+           no path found/replanning episode = 37.06 percent,
+           total time in main search routine/run = 79.6637,
+           total time/run = 84.6740
+time[1] =  0.1592 time[2] =  0.3259 time[3] =  0.4887 time[4] =  0.7168
+
+LPA* outperforms A* after the first replanning episode and speeds up
+the total runtime in the long run by a factor of 2.6.
+
+Maze 3: goal cannot get blocked, heuristics = max difference in x and y coordinates
+
+width = 40, height = 40, obstacle density = 0.40, start= (34,20), goal= (5,20)
+The maze is eight-connected.
+runs = 100, replanning episodes/run = 500, cells changing per replanning episode = 16 (1.00 percent)
+The goal cell cannot get blocked.
+
+LPA* replans.
+LPA*: cell expansions/replanning episode =   18.80,
+           heap percolates/replanning episode =  182.15,
+           no path found/replanning episode =  0.29 percent,
+           total time in main search routine/run =  6.6555,
+           total time/run = 13.2189
+time[1] =  0.0735 time[2] =  0.1049 time[3] =  0.1303 time[4] =  0.1559
+A* breaks ties in favor of cells with larger g-values.
+A*:   cell expansions/replanning episode =   68.17,
+           heap percolates/replanning episode =  547.72,
+           no path found/replanning episode =  0.29 percent,
+           total time in main search routine/run = 13.6230,
+           total time/run = 18.6096
+time[1] =  0.0381 time[2] =  0.0818 time[3] =  0.1233 time[4] =  0.1648
+A* breaks ties in favor of cells with smaller g-values.
+A*:   cell expansions/replanning episode =  172.20,
+           heap percolates/replanning episode =  724.60,
+           no path found/replanning episode =  0.29 percent,
+           total time in main search routine/run = 27.5681,
+           total time/run = 32.8059
+time[1] =  0.0648 time[2] =  0.1366 time[3] =  0.2019 time[4] =  0.2671
+
+LPA* outperforms A* after the third replanning episode and speeds up
+the total runtime in the long run by a factor of 1.4.
+
+Maze 3: goal can get blocked, heuristics = max difference in x and y coordinates
+
+width = 40, height = 40, obstacle density = 0.40, start= (34,20), goal= (5,20)
+The maze is eight-connected.
+runs = 100, replanning episodes/run = 500, cells changing per replanning episode = 16 (1.00 percent)
+The goal cell can get blocked.
+
+LPA* replans.
+LPA*: cell expansions/replanning episode =   74.89,
+           heap percolates/replanning episode =  422.82,
+           no path found/replanning episode = 39.91 percent,
+           total time in main search routine/run = 19.0092,
+           total time/run = 26.2880
+time[1] =  0.1664 time[2] =  0.2117 time[3] =  0.2593 time[4] =  0.3008
+A* breaks ties in favor of cells with larger g-values.
+A*:   cell expansions/replanning episode =  419.32,
+           heap percolates/replanning episode = 2609.27,
+           no path found/replanning episode = 39.91 percent,
+           total time in main search routine/run = 72.4106,
+           total time/run = 77.3171
+time[1] =  0.1441 time[2] =  0.2938 time[3] =  0.4464 time[4] =  0.5971
+A* breaks ties in favor of cells with smaller g-values.
+A*:   cell expansions/replanning episode =  481.44,
+           heap percolates/replanning episode = 2342.68,
+           no path found/replanning episode = 39.91 percent,
+           total time in main search routine/run = 74.4280,
+           total time/run = 79.3210
+time[1] =  0.1509 time[2] =  0.3056 time[3] =  0.4614 time[4] =  0.6151
+
+LPA* outperforms A* after the first replanning episode and speeds up
+the total runtime in the long run by a factor of 2.9.
+

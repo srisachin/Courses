@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>DISCover</title>
+
+<!-- JS IMPORTS -->
+<script language="JavaScript" type="text/javascript"
+	src="js/jquery-1.7.2.min.js"></script>
+<script language="JavaScript" type="text/javascript"
+	src="js/jquery-ui-1.8.22.custom.min.js"></script>
+<script language="JavaScript" type="text/javascript"
+	src="js/jquery-ui.js"></script>
+<script language="javascript" type="text/javascript"
+	src="js/jquery.dataTables.min.js"></script>
+<script language="javascript" type="text/javascript"
+	src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBf58NNYBycGRTrtkplL0FjwvqY0NXwcXA&sensor=false"></script>
+<script language="javascript" type="text/javascript" src="js/jit.js"></script>
+<script language="javascript" type="text/javascript" src="js/treemap.js"></script>
+<script language="javascript" type="text/javascript" src="js/json2.js"></script>
+<script language="javascript" type="text/javascript"
+	src="js/protovis.js"></script>
+<script language="javascript" type="text/javascript"
+	src="js/arc_diagram.js"></script>
+<script language="javascript" type="text/javascript"
+	src="js/stacked_area_chart.js"></script>
+<script language="javascript" type="text/javascript"
+	src="js/mapiconmaker.js"></script>
+
+<!-- CSS IMPORTS -->
+<link type="text/css" href="css/discover.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/jquery-ui-1.8.22.custom.css" />
+<link rel="stylesheet" href="css/jquery.dataTables_themeroller.css" />
+<link rel="stylesheet" href="css/leaflet.css" />
+
+</head>
+<body>
+	<div id="discoverDiv"
+		style="vertical-align: middle; font-family: sans-serif; font-size: 11px; padding-bottom: 5px;">
+		<table
+			style="vertical-align: middle; height: 20px; width: 90%; margin-left: 5%; margin-right: 5%;">
+			<tr>
+				<td style="vertical-align: bottom; text-align: left;"><a
+					style="font-size: 18px; font-family: arial; color: #aaaaaa;"> <b>DISCover</b>
+						{Music Analytics}
+				</a></td>
+			</tr>
+		</table>
+	</div>
+	<table id="mainTable"
+		style="margin-top: 20px; width: 70%; margin-left: 5%; margin-right: 5%; padding: 0px;">
+		<tr>
+			<!-- td style="width: 20%;">
+				<div id="searchDiv" style="height: 805px;">
+					<fieldset>
+						<legend>
+							<a
+								style="font-family: sans-serif; font-size: 13px; color: #686C70;">Search</a>
+						</legend>
+						<table id="keywordSearchTable" style="width: 100%">
+							<tr style="text-align: left;">
+								<td colspan="5"
+									style="font-family: sans-serif; font-size: 13px; color: #686C70;"><b>Keyword</b>
+								</td>
+							</tr>
+							<tr style="text-align: left;" style="vertical-align: middle;">
+								<td colspan="5"><input id="search_keyword" type="text"
+									name="search_keyword" style="height: 18px; margin-top: 5px"
+									size="40%" />
+									<p>
+								</td>
+							</tr>
+							<tr style="text-align: left;">
+								<td colspan="5"
+									style="font-family: sans-serif; font-size: 13px; color: #686C70;"><b>Satisfaction
+										Score (0/100)</b></td>
+							</tr>
+							<tr style="text-align: left; vertical-align: middle;">
+								<td align="left" style="width: 20px;"><input id="min_score"
+									type="text" size="3%" style="margin-top: 5px;" /></td>
+								<td align="left"
+									style="text-align: center; font-family: sans-serif; font-size: 13px; color: #686C70; width: 35x; margin-top: 5px;">
+									</td>
+								<td align="left" style="width: 20px;"><input id="max_score"
+									type="text" size="3%" style="margin-top: 5px;" /></td>
+								<td align="left" colspan="2"></td>
+							</tr>
+							<tr style="text-align: left;">
+								<td colspan="5"
+									style="font-family: sans-serif; font-size: 13px; color: #686C70; padding-top: 10px;">
+									<b>Time Interval</b></td>
+							</tr>
+							<tr style="text-align: left">
+								<td colspan="3" align="left"
+									style="width: 20px; padding-top: 5px;"><input
+									id="datepickerStart" type="text"></td>
+								<td align="left"
+									style="text-align: center; font-family: sans-serif; font-size: 13px; color: #686C70; width: 10px; padding-top: 5px;" ><b>To:</b>
+								</td>
+								<td align="left" style="width: 20px; padding-top: 5px;"><input
+									id="datepickerEnd" type="text"></td>
+							</tr>
+							<tr style="text-align: left;">
+								<td colspan="5"
+									style="font-family: sans-serif; font-size: 13px; color: #686C70;">
+									<p>
+										<b>Product Type</b>
+								</td>
+							</tr>
+							<tr style="text-align: left;">
+								<td colspan="5">
+									<table id="genre_table" class='display'></table>
+								</td>
+							</tr>
+							<tr style="text-align: right;">
+							<td><button id="back_button" onclick="backToOriginalSearchResults();">Back</button></td>
+								<td colspan="5">
+									<p>
+										<button id="clear_button" onclick="clearSearchFilters();"
+											style="margin-top: 10px; margin-right: 5x;">Reset</button>
+										<button id="search_button"
+											onclick="searchByKeyword(document.getElementById('search_keyword').value, document.getElementById('min_score').value, document.getElementById('max_score').value,document.getElementById('datepickerStart').value, document.getElementById('datepickerEnd').value, null, false);"
+											style="margin-top: 10px; margin-right: 5x;">Search</button>
+								</td>
+							</tr>
+						</table>
+
+					</fieldset>
+
+				</div>
+			</td-->
+			<td style="width: 80%;">
+				<div id="visualizationDiv" style="height: 650px;">
+					<ul style="list-style: none;">
+
+						<li id="liTab1" style="list-style: none;"><a href="#tab3">Trending
+								Song Analysis</a></li>
+						<li id="liTab2" style="list-style: none;"><a href="#tab4">Country
+								Based Analysis</a></li>
+						<li id="liTab2" style="list-style: none; visibility: hidden;"><a
+							href="#tab5"></a></li>
+						<li id="liTab1" style="list-style: none; visibility: hidden;"><a
+							href="#tab1"></a></li>
+						<li id="liTab2" style="list-style: none; visibility: hidden;"><a
+							href="#tab2"></a></li>
+					</ul>
+
+					<div id="tab2" style="height: 95%">
+
+						<div id="infovis" style="width: 100%; height: 100%;"></div>
+
+					</div>
+
+					<div id="tab3" style="height: 95%">
+						<table style="padding-top: 50px; margin-left: 20px;">
+
+							<tr>
+
+								<td colspan="1">
+									<fieldset>
+										<legend>
+											<a
+												style="font-family: sans-serif; font-size: 13px; color: #686C70;"><b>
+													Filter Songs</b></a>
+										</legend>
+										<table style="margin-top:10px;">
+											<tr style="text-align: left; padding-bottom: 40px; margin-top:10px;">
+												<td style="margin-top: 50px; padding-bottom: 10px;"><label
+													for="view"
+													style="font-family: sans-serif; font-size: 13px; color: #686C70;">View
+														range:</label> <input type="text" id="view" readonly
+													style="border: 0; color: #f6931f; font-weight: bold;">
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div id="slider-range" style="width: 250px;"></div>
+												</td>
+											</tr>
+											<tr style="text-align: left;">
+												<td
+													style="font-family: sans-serif; font-size: 13px; color: #686C70;">
+													<p>Genre Type
+												</td>
+											</tr>
+											<tr style="text-align: left;">
+												<td>
+													<table id="genre_table" class='display'></table>
+												</td>
+											</tr>
+											<tr style="text-align: right;">
+												<!--  td><button id="back_button" onclick="backToOriginalSearchResults();">Back</button></td -->
+												<td>
+													<p>
+														<button id="deselect_button"
+															onclick="clearGenreFilters();"
+															style="margin-top: 10px; margin-right: 5x;">Clear
+															Genre Selections</button>
+
+														<button id="search_button" onclick="filterResults();"
+															style="margin-top: 10px; margin-right: 5x;">Filter</button>
+												</td>
+											</tr>
+										</table>
+									</fieldset>
+								</td>
+								<td colspan="1">
+								<h2 style="text-align:middle;"> Top Ten Songs</h2>
+									<div style="width: 600px; overflow: auto; margin-left: 50px; margin-top:20px;">
+										<div id="trend_graph" style="width: 80%; height: 400px;"></div>
+									</div>
+								</td>
+								<td style="text-align: left;">
+									<ul id="id-list1" style="list-style-type: none; width: 300px;"></ul>
+								</td>
+							<tr>
+								<td colspan="1"></td>
+								<td colspan="1">
+
+									<table style="margin-left: 50px;">
+										<tr>
+											<td><button id="restore">Show All</button></td>
+										</tr>
+										<tr>
+
+										</tr>
+									</table>
+
+
+								</td>
+							</tr>
+						</table>
+
+
+					</div>
+
+					<div id="tab4" style="height: 95%">
+						<table style="margin-top: 10px;">
+							<tr style="text-align: left;">
+								<td><label for="speed">Select a relation</label> <select
+									name="speed" id="speed" onchange="updateArc()">
+										<option value="1" selected="selected">Country Genre</option>
+										<option value="2">Country decade</option>
+										<option value="3">Country Genre Decade</option>
+								</select></td>
+							</tr>
+							<tr style="text-align: middle;">
+								<td
+									style="text-align: middle; align: middle; margin-left: 30px; padding-left: 80px;">
+									<div id="arc_diagram" style="width: 880; height: 310;"></div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!-- div id="map_legend">
+						<table style="margin-top: 10px; margin-left: 55px;">
+							<tr>
+								<td><img alt="Product_Image"
+									src="css/images/product_node.png"></td>
+								<td>Country</td>
+								<td><img alt="Service_Image"
+									src="css/images/service_node.png"></td>
+								<td>Genre</td>
+								
+							</tr>
+						</table>
+					</div-->
+				</div>
+
+			</td>
+		</tr>
+	</table>
+	<!-- button id="a" style="width:100px; height:100px;"></button-->
+	</tr>
+	</table>
+	<script type="text/javascript">
+		treemapRef = false;
+		var myArcData;
+		//var arcDiagramData;
+		$('#genre_table').dataTable({
+			"sScrollY" : "200px",
+			//"sScrollX" : "50%",
+			"bFilter" : false,
+			"word-wrap" : "break-word",
+			"bJQueryUI" : true,
+			//"sPaginationType" : "two_button",
+			"bAutoWidth" : true,
+			"bLengthChange" : false,
+			//"aaSorting" : [ [ 0, "asc" ] ],
+			"bPaginate" : true,
+			"iDisplayLength" : 100,
+			"bProcessing" : true,
+			//"bServerSide" : true,
+			"sAjaxSource" : '../Music/GenreServlet',
+			//"bLengthChange" : true,
+			"aoColumns" : [ {
+				"sWidth" : '50%',
+				"mDataProp" : function(source, type, val) {
+					var str = "";
+					$.each(source, function(key, val) {
+						str += val;
+					});
+					return str;
+				},
+				"sClass" : "sorting_2"
+			} ]
+		});
+
+		// 							$.getJSON('OntServlet', {
+		// 								ont : "CustomerSurvey"
+		// 							}, function(productList) {
+		// 								$('#genre_table').dataTable().fnClearTable();
+		// 								$.each(productList, function(key, val) {
+		// 									var text = val;
+		// 									var position = val.lastIndexOf("#");
+		// 									if (position != -1) {
+		// 										text = val.substr(position + 1);
+		// 									}
+		// 									$('#genre_table').dataTable().fnAddData(
+		// 											String(text));
+		// 								});
+		// 							});
+
+		$("#genre_table tbody").click(function(event) {
+
+			if ($(event.target.parentNode).hasClass('selected-row')) {
+				$(event.target.parentNode).removeClass('selected-row');
+			} else {
+				$(event.target.parentNode).addClass('selected-row');
+			}
+		});
+
+		$("#slider-range").slider({
+			range : true,
+			min : 0,
+			max : 865000000,
+			values : [ 10000, 75000000 ],
+			orientation : "horizontal",
+			slide : function(event, ui) {
+				$("#view").val(ui.values[0] + " - " + ui.values[1]);
+			}
+		});
+		$("#view").val(
+				$("#slider-range").slider("values", 0) + " - "
+						+ $("#slider-range").slider("values", 1));
+		$("#visualizationDiv")
+				.tabs()
+				.bind(
+						"tabsselect",
+						function(event, ui) {
+
+							//if (ui.index == 1) {
+							//if (treemapRef == false) {
+							//initTreemap(json);
+							//treemapRef = true;
+							//}
+							//}
+							if (ui.index == 1) {
+								$.getJSON('LinkServlet', {
+
+								}, function(arcData) {
+									myArcData = arcData;
+									//arcDiagramData = arcData;
+								});
+								initArcDiagram(countryGenreFinal);
+								//var select = document.getElementById("#speed");
+								opt = 0;
+								if (document.getElementById("speed").selectedIndex > -1) {
+									opt = document.getElementById("speed").selectedIndex;
+								}
+								if (opt == 0) {
+									initArcDiagram(countryGenreFinal);
+								} else if (opt == 1) {
+									initArcDiagram(countryDecadeFinal);
+								} else if (opt == 2) {
+									initArcDiagram(countryDecadeGenre);
+								}
+							} else if (ui.index == 0) {
+								$
+										.getJSON(
+												'TrendGraphServlet',
+												{
+													//range_start : 1000000,
+													//range_end : 865000000
+													range_start : $(
+															"#slider-range")
+															.slider("values", 0),
+													range_end : $(
+															"#slider-range")
+															.slider("values", 1),
+													genres : ""
+												},
+												function(trendGraphData) {
+													trendMapElementCount = trendGraphData.values.length;
+													var tempData = jQuery
+															.extend(true, {},
+																	trendGraphData);
+													;
+													$('#trend_graph')
+															.width(
+																	(trendMapElementCount * 100)
+																			+ "px");
+													tempData.values = tempData.values
+															.slice(0,
+																	trendMapElementCount);
+													initChart(tempData);
+												});
+
+							}
+						})
+				.bind(
+						"tabsshow",
+						function(event, ui) {
+							if (ui.index == 1) {
+								initArcDiagram(countryGenreFinal);
+								//var select = document.getElementById("#speed");
+								opt = 0;
+								if (document.getElementById("speed").selectedIndex > -1) {
+									opt = document.getElementById("speed").selectedIndex;
+								}
+								//$.getJSON('LinkServlet', {
+
+								//}, function(arcData) {
+								//	myArcData = arcData;
+								//});
+								//initArcDiagram(myArcData);
+								if (opt == 0) {
+									initArcDiagram(countryGenreFinal);
+								} else if (opt == 0) {
+									initArcDiagram(countryDecadeFinal);
+								} else if (opt == 2) {
+									initArcDiagram(countryDecadeGenre);
+								}
+							}
+							//else if (ui.index == 1) {
+							//	//if (treemapRef == false) {
+							//	initTreemap(json);
+							//	//treemapRef = true;
+							//	//}
+							//} 
+							else if (ui.index == 0) {
+								$
+										.getJSON(
+												'TrendGraphServlet',
+												{
+													//range_start : 1000000,
+													//range_end : 865000000
+													range_start : $(
+															"#slider-range")
+															.slider("values", 0),
+													range_end : $(
+															"#slider-range")
+															.slider("values", 1),
+													genres : ""
+												},
+												function(trendGraphData) {
+													trendMapElementCount = trendGraphData.values.length;
+													var tempData = jQuery
+															.extend(true, {},
+																	trendGraphData);
+													;
+													$('#trend_graph')
+															.width(
+																	(trendMapElementCount * 100)
+																			+ "px");
+													tempData.values = tempData.values
+															.slice(0,
+																	trendMapElementCount);
+													initChart(tempData);
+												});
+							}
+						});
+
+		function clearGenreFilters() {
+			var oTable = $("#genre_table").dataTable();
+			$(oTable.fnSettings().aoData).each(function() {
+				$(this.nTr).removeClass('selected-row');
+			});
+		}
+
+		/* Get the rows which are currently selected */
+		function fnGetSelected(oTableLocal) {
+			var aReturn = new Array();
+			var aTrs = oTableLocal.fnGetNodes();
+
+			for (var i = 0; i < aTrs.length; i++) {
+				if ($(aTrs[i]).hasClass('selected-row')) {
+					aReturn.push(aTrs[i]);
+				}
+			}
+			return aReturn;
+		}
+
+		function updateArc() {
+			opt = 0;
+			if (document.getElementById("speed").selectedIndex > -1) {
+				opt = document.getElementById("speed").selectedIndex;
+			}
+			if (opt == 0) {
+				initArcDiagram(countryGenreFinal);
+			} else if (opt == 1) {
+				initArcDiagram(countryDecadeFinal);
+			} else if (opt == 2) {
+				initArcDiagram(countryDecadeGenre);
+			}
+		}
+
+		function filterResults() {
+			//get selected products
+			var selectedRows = fnGetSelected($('#genre_table').dataTable());
+			var genreStr;
+			$.each(selectedRows, function(key, val) {
+				if (!genreStr) {
+					genreStr = "'";
+				} else if (genreStr != "") {
+					genreStr += "','";
+				}
+				genreStr += val.textContent
+			});
+
+			if (genreStr)
+				genreStr += "'";
+
+			$.getJSON('TrendGraphServlet', {
+				//range_start : 1000000,
+				//range_end : 865000000
+				range_start : $("#slider-range").slider("values", 0),
+				range_end : $("#slider-range").slider("values", 1),
+				genres : genreStr
+			}, function(trendGraphData) {
+				trendMapElementCount = trendGraphData.values.length;
+				var tempData = jQuery.extend(true, {}, trendGraphData);
+				;
+				$('#trend_graph').width((trendMapElementCount * 100) + "px");
+				tempData.values = tempData.values
+						.slice(0, trendMapElementCount);
+				initChart(tempData);
+			});
+		}
+
+		//initTreemap(json);
+
+		//$(function() {
+		//	$("#speed").selectmenu({
+		//		change : function(event, ui) {
+		//		}
+		//	});
+		//});
+
+		selectedArcView = 2;
+
+		$.getJSON('TrendGraphServlet', {
+			//range_start : 1000000,
+			//range_end : 865000000
+			range_start : $("#slider-range").slider("values", 0),
+			range_end : $("#slider-range").slider("values", 1),
+			genres : ""
+		}, function(trendGraphData) {
+			trendMapElementCount = trendGraphData.values.length;
+			var tempData = jQuery.extend(true, {}, trendGraphData);
+			;
+			$('#trend_graph').width((trendMapElementCount * 100) + "px");
+			tempData.values = tempData.values.slice(0, trendMapElementCount);
+			initChart(tempData);
+		});
+
+		//$("#speed").on("selectmenuchange", function(event, ui) {
+		//	selectedArcView = $("#speed").val();
+		//	if (selectedArcView == 1) {
+		//		initArcDiagram(countryGenreFinal);
+		//	} else if (selectedArcView == 2) {
+		//		initArcDiagram(countryDecadeFinal);
+		//	}else if (selectedArcView == 3) {
+		//		initArcDiagram(countryDecadeGenre);
+		//	}
+		//});
+
+		//$.getJSON('LinkServlet', {
+
+		//}, function(arcData) {
+		//	myArcData = arcData;
+		//	arcDiagramData = arcData;
+		//	initArcDiagram(myArcData);
+		//});s
+
+		//$(document).ready(function() {
+
+		//});
+	</script>
+
+</body>
+</html>

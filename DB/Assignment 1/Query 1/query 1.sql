@@ -1,0 +1,1 @@
+select BEER from SERVES where BAR in (select BAR from FREQUENTS group by BAR having count(name)>3)

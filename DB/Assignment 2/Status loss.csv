@@ -1,0 +1,11 @@
+Status,avg(capitalloss),sum(capitalloss)
+Never-worked,149014.9583,3576359
+Without-pay,79578.0294,2705653
+Self-emp-inc,4520.9487,4936876
+Federal-gov,3756.0743,3587051
+State-gov,3678.5907,4359130
+Local-gov,2127.3701,4339835
+?,2072.9657,3018238
+Self-emp-not-inc,1791.2381,4415402
+Private,629.4664,13031213
+STATUS,0.0000,0

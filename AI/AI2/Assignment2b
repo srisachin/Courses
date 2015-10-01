@@ -1,0 +1,81 @@
+import random
+
+class Str(object):
+    def __init__(self):
+        self.str = []
+        
+    def genRandStr(self):
+        for i in range(20):
+            self.str.append(random.getrandbits(1))
+
+    def retStr(self):
+        return self.str
+
+    def evaluate(self, data):
+        x=0
+        for clause in data:
+            x += self.isClause(clause)
+        return x
+
+    def isClause(self, clause):
+        x=False
+        for var in clause:
+            if (var =='0'):
+                continue;
+            if (int(var) > 0):
+                x = x or bool(self.str[abs(int(var))-1])
+            else:
+                x = x or (not(self.str[abs(int(var))-1]))
+        return x
+    
+class Genetic(object):
+    def __init__(self, numClauses):
+        self.numClauses=numClauses
+        self.s = []
+        self.cnf = []
+        self.sat = bool()
+        self.f = []
+
+    def readFile(self):
+        filename = "C:\\Users\\sachinsri12345\\Desktop\\AI2\\uf20\\uf20-01.cnf"
+        eof = False
+        with open(filename) as f:
+            for line in f:
+                if (eof):
+                    self.sat = line[0]
+                    continue
+                if( line[0] == 'c' or line[0] == 'p' ):
+                    continue
+                if( line[0] == '%'):
+                    eof = True
+                    continue
+                self.cnf.append(line.split())
+        print(self.cnf)
+
+    def genRandStrs(self):
+        for i in range(10):
+            temp = Str()
+            temp.genRandStr()
+            self.s.append(temp)
+
+    def printRandStrs(self):
+        for i in range(10):
+            #self.s[i].printStr()
+            print(self.s[i].retStr())
+
+    def evaluateAll(self):
+        score = []
+        for its in self.s:
+            score.append(its.evaluate(self.cnf))
+        print(score)
+    
+def main():
+    A = Genetic(100)
+    A.readFile()
+    A.genRandStrs()
+    A.printRandStrs()
+    A.evaluateAll()
+        
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,91 @@
+\documentclass[10pt,onecolumn,letterpaper]{article}
+
+\usepackage{report}
+\usepackage{times}
+\usepackage{epsfig} % You can comment this out if you use pdflatex and PDF figures
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
+
+
+%%\reportfinalcopy % *** Uncomment this line for the final submission
+
+\def\reportPaperID{002} % *** Enter the Project Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+\ifreportfinal\pagestyle{empty}\fi
+\begin{document}
+
+%%%%%%%%% TITLE
+\title{\LaTeX\ Mini Project 3}
+
+\author{Sachin Srivastava\\
+Rutgers Univeristy\\
+{\tt\small sachin.srivastava@rutgers.edu}
+}
+
+
+\maketitle
+% \thispagestyle{empty}
+
+
+%%%%%%%%% BODY TEXT
+\section{Problem 1}
+
+$$
+ln P(E) = ln \sum_{H} P(H,E) 
+$$
+$$
+= ln \sum_{H} Q(H|E). \frac{P(H,E)}{Q(H|E)}
+$$
+$$
+>= \sum_{H} Q(H|E) ln \frac{P(H,E)}{Q(H|E)}
+$$
+
+The difference between the inequality is given by KL divergence $D(Q||P)$.
+which is $=-\sum Q(H|E) ln \frac{P(H|E)}{Q(H|E)}$\\ as we have\\
+$$
+ln P(E) = \sum_H Q(H|E) ln\frac{P(E,H)}{Q(H|E)} - \sum_H Q(H|E) ln\frac{ P(H|E)}{Q(H|E)}
+$$
+from the Bayes theorem.\\
+
+We cannot consider $D(P||Q)$ as KL divergence is not symmetric, i.e. $D(P||Q)!= D(Q||P)$ 
+\section{Problem 2}
+
+
+\section{Problem 3}
+
+For a fixed $x_i$, $y_i$ are i.i.d random variables with $y_i ~ N(w_1x_i +w_0, \sigma^2)$. So the
+probability distribution of $y_1$, $y_2$, ... is defined by:\\
+$$f(y_1, ..., y_n|w_1,w_0) = \pi_{i=1}^nf(y_i|w_1,w_0)$$\\
+$$= \pi_{i=1}^n\frac{1}{(2\sigma^2)^{\frac{n}{2}}} \exp^\frac{-(y_i-w_1x_i-w_0)^2}{2\sigma^2}$$
+$$= \frac{1}{(2\sigma^2)^{\frac{n}{2}}} \exp^{\frac{1}{(2\sigma^2)^{\frac{n}{2}}}\sum_{i=1}^n{(y_i-w_1x_i-w_0)^2}}$$
+
+To get the MLE estimates of $w_1$ and $w_0$ we will set $\frac{\partial f}{\partial w_1} = 0$ and $\frac{\partial f}{\partial w_0} = 0$
+which leads to the equations:\\
+$$
+\sum_{i=1}^nx_i(y_i-w_1x_i-w_0)=0
+$$
+$$
+\sum_{i=1}^n(y_i-w_1x_i-w_0)=0
+$$
+Solving the second equation for $w_0$ yields $w_0 = y - w_1x$ and replacing $w_0$ in the first equation yields:\\
+$$
+\sum_{i=1}^n(x_i-\bar{x}+\bar{x})(y_i-w_1x_i-\bar{y}+w_1\bar{x})=0
+$$
+
+which in turn leads to \\
+$$
+w_1 = \frac{ \sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})}
+$$
+
+
+\end{document}

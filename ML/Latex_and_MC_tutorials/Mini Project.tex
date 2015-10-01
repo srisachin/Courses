@@ -1,0 +1,119 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{report}
+\usepackage{times}
+\usepackage{epsfig} % You can comment this out if you use pdflatex and PDF figures
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
+
+
+%%\reportfinalcopy % *** Uncomment this line for the final submission
+
+\def\reportPaperID{****} % *** Enter the Project Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+\ifreportfinal\pagestyle{empty}\fi
+\begin{document}
+
+%%%%%%%%% TITLE
+\title{\LaTeX\ Author Guidelines for Project Report}
+
+\author{First Author\\
+Institution1\\
+Institution1 address\\
+{\tt\small firstauthor@i1.org}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+\and
+Second Author\\
+Institution2\\
+First line of institution2 address\\
+{\small\url{http://www.author.org/~second}}
+}
+
+\maketitle
+% \thispagestyle{empty}
+
+
+%%%%%%%%% BODY TEXT
+\section{Layouts}
+
+This is math in the text $sin(\alpha)$
+\begin{enumerate}
+\item My first Item
+	\begin{enumerate}
+	\item Nested item
+	\end{enumerate}
+\item My second item
+\end{enumerate}
+
+
+\section{Problem 1}
+
+The complete strip is at most $\epsilon$.\\
+Probability that we miss a strip is $1-\epsilon$.\\
+Probability that N instances miss a strip is $(1-\epsilon)^n$.\\
+We know that $(1-x)<=e^x$.\\
+
+\section{Problem 2}
+For a finite.
+
+$$
+\left[\begin{array}{cc}
+
+1 & 2 \\ 
+3 & 4 \\
+
+\end{array}\right]
+$$
+
+\[
+  \mathbb{E}[x] = \int_{x \in {\cal X}} x p(x) dx.
+\]
+$$
+	[Ax]_j = \sum_{i=1}^{n}a_{j,i}x_i
+$$
+$$
+(1-e)^n <=d
+$$
+
+%-------------------------------------------------------------------------
+\subsection{References}
+
+Example: ~\cite{Authors11}. 
+Do PDFLATEX - Bibtex - PDFlatex - PDFlatex dance.
+
+\begin{table}
+\caption{Results.   Ours is better.}
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+Method & Frobnability \\
+\hline\hline
+Theirs & Frumpy \\
+Yours & Frobbly \\
+Ours & Makes one's heart Frob\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{egbib}
+}
+
+
+\end{document}

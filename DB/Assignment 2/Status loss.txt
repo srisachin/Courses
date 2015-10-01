@@ -1,0 +1,1 @@
+SELECT Status, avg(capitalloss), sum(capitalloss) FROM PracticeDB.541puzzle group by Status order by avg(capitalloss) desc;
